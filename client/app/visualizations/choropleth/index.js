@@ -26,7 +26,43 @@ import editorTemplate from './choropleth-editor.html';
 import countriesDataUrl from './countries.geo.json';
 import subdivJapanDataUrl from './japan.prefectures.geo.json';
 import stateIndiaDataUrl from './india.state.geo.json';
-import districtIndiaDataUrl from './india.district.geo.json';
+
+import chandigarhIndiaDataUrl from './india_chandigarh.geojson';
+import dadraNagarIndiaDataUrl from './india_dadra_and_nagar_have.geojson';
+import delhiIndiaDataUrl from './india_delhi.geojson';
+import puducherryIndiaDataUrl from './india_puducherry.geojson';
+import goaIndiaDataUrl from './india_goa.geojson';
+import damanDiuIndiaDataUrl from './india_daman_and_diu.geojson';
+import sikkimIndiaDataUrl from './india_sikkim.geojson';
+import tripuraIndiaDataUrl from './india_tripura.geojson';
+import meghalayaIndiaDataUrl from './india_meghalaya.geojson';
+import lakshadweepIndiaDataUrl from './india_lakshadweep.geojson';
+import nagalandIndiaDataUrl from './india_nagaland.geojson';
+import manipurIndiaDataUrl from './india_manipur.geojson';
+import mizoramIndiaDataUrl from './india_mizoram.geojson';
+import himachalPradeshIndiaDataUrl from './india_himachal_pradesh.geojson';
+import arunachalPradeshIndiaDataUrl from './india_arunachal_pradesh.geojson';
+import telanganaIndiaDataUrl from './india_telangana.geojson';
+import haryanaIndiaDataUrl from './india_haryana.geojson';
+import keralaIndiaDataUrl from './india_kerala.geojson';
+import uttarakhandIndiaDataUrl from './india_uttarakhand.geojson';
+import punjabIndiaDataUrl from './india_punjab.geojson';
+import jammuKashmirIndiaDataUrl from './india_jammu_and_kashmir.geojson';
+import andhraPradeshIndiaDataUrl from './india_andhra_pradesh.geojson';
+import jharkhandIndiaDataUrl from './india_jharkhand.geojson';
+import chhattisgarhIndiaDataUrl from './india_chhattisgarh.geojson';
+import assamIndiaDataUrl from './india_assam.geojson';
+import biharIndiaDataUrl from './india_bihar.geojson';
+import odishaIndiaDataUrl from './india_odisha.geojson';
+import karnatakaIndiaDataUrl from './india_karnataka.geojson';
+import tamilNaduIndiaDataUrl from './india_tamil_nadu.geojson';
+import rajasthanIndiaDataUrl from './india_rajasthan.geojson';
+import maharashtraIndiaDataUrl from './india_maharashtra.geojson';
+import uttarPradeshIndiaDataUrl from './india_uttar_pradesh.geojson';
+import madhyaPradeshIndiaDataUrl from './india_madhya_pradesh.geojson';
+import andamanNicobarIndiaDataUrl from './india_andaman_and_nicobar.geojson';
+import westBengalIndiaDataUrl from './india_west_bengal.geojson';
+import gujaratIndiaDataUrl from './india_gujarat.geojson';
 
 export const ChoroplethPalette = _.extend({}, AdditionalColors, ColorPalette);
 
@@ -118,7 +154,42 @@ const ChoroplethRenderer = {
         case 'countries': return countriesDataUrl;
         case 'subdiv_japan': return subdivJapanDataUrl;
         case 'state_india': return stateIndiaDataUrl;
-        case 'district_india': return districtIndiaDataUrl;
+        case 'chandigarh_india': return chandigarhIndiaDataUrl;
+        case 'dadraNagar_india': return dadraNagarIndiaDataUrl;
+        case 'delhi_india': return delhiIndiaDataUrl;
+        case 'puducherry_india': return puducherryIndiaDataUrl;
+        case 'goa_india': return goaIndiaDataUrl;
+        case 'damanDiu_india': return damanDiuIndiaDataUrl;
+        case 'sikkim_india': return sikkimIndiaDataUrl;
+        case 'tripura_india': return tripuraIndiaDataUrl;
+        case 'meghalaya_india': return meghalayaIndiaDataUrl;
+        case 'lakshadweep_india': return lakshadweepIndiaDataUrl;
+        case 'nagaland_india': return nagalandIndiaDataUrl;
+        case 'manipur_india': return manipurIndiaDataUrl;
+        case 'mizoram_india': return mizoramIndiaDataUrl;
+        case 'himachalPradesh_india': return himachalPradeshIndiaDataUrl;
+        case 'arunachalPradesh_india': return arunachalPradeshIndiaDataUrl;
+        case 'telangana_india': return telanganaIndiaDataUrl;
+        case 'haryana_india': return haryanaIndiaDataUrl;
+        case 'kerala_india': return keralaIndiaDataUrl;
+        case 'uttarakhand_india': return uttarakhandIndiaDataUrl;
+        case 'punjab_india': return punjabIndiaDataUrl;
+        case 'jammuKashmir_india': return jammuKashmirIndiaDataUrl;
+        case 'andhraPradesh_india': return andhraPradeshIndiaDataUrl;
+        case 'jharkhand_india': return jharkhandIndiaDataUrl;
+        case 'chhattisgarh_india': return chhattisgarhIndiaDataUrl;
+        case 'assam_india': return assamIndiaDataUrl;
+        case 'bihar_india': return biharIndiaDataUrl;
+        case 'odisha_india': return odishaIndiaDataUrl;
+        case 'karnataka_india': return karnatakaIndiaDataUrl;
+        case 'tamilNadu_india': return tamilNaduIndiaDataUrl;
+        case 'rajasthan_india': return rajasthanIndiaDataUrl;
+        case 'maharashtra_india': return maharashtraIndiaDataUrl;
+        case 'uttarPradesh_india': return uttarPradeshIndiaDataUrl;
+        case 'madhyaPradesh_india': return madhyaPradeshIndiaDataUrl;
+        case 'andamanNicobar_india': return andamanNicobarIndiaDataUrl;
+        case 'westBengal_india': return westBengalIndiaDataUrl;
+        case 'gujarat_india': return gujaratIndiaDataUrl;
         default: return '';
       }
     };
@@ -269,7 +340,42 @@ const ChoroplethEditor = {
       countries: 'Countries',
       subdiv_japan: 'Japan/Prefectures',
       state_india: 'India/States',
-      district_india: 'India/Districts',
+      chandigarh_india: 'India/chandigarh',
+      dadraNagar_india: 'India/dadraNagar',
+      delhi_india: 'India/delhi',
+      puducherry_india: 'India/puducherry',
+      goa_india: 'India/goa',
+      damanDiu_india: 'India/damanDiu',
+      sikkim_india: 'India/sikkim',
+      tripura_india: 'India/tripura',
+      meghalaya_india: 'India/meghalaya',
+      lakshadweep_india: 'India/lakshadweep',
+      nagaland_india: 'India/nagaland',
+      manipur_india: 'India/manipur',
+      mizoram_india: 'India/mizoram',
+      himachalPradesh_india: 'India/himachalPradesh',
+      arunachalPradesh_india: 'India/arunachalPradesh',
+      telangana_india: 'India/telangana',
+      haryana_india: 'India/haryana',
+      kerala_india: 'India/kerala',
+      uttarakhand_india: 'India/uttarakhand',
+      punjab_india: 'India/punjab',
+      jammuKashmir_india: 'India/jammuKashmir',
+      andhraPradesh_india: 'India/andhraPradesh',
+      jharkhand_india: 'India/jharkhand',
+      chhattisgarh_india: 'India/chhattisgarh',
+      assam_india: 'India/assam',
+      bihar_india: 'India/bihar',
+      odisha_india: 'India/odisha',
+      karnataka_india: 'India/karnataka',
+      tamilNadu_india: 'India/tamilNadu',
+      rajasthan_india: 'India/rajasthan',
+      maharashtra_india: 'India/maharashtra',
+      uttarPradesh_india: 'India/uttarPradesh',
+      madhyaPradesh_india: 'India/madhyaPradesh',
+      andamanNicobar_india: 'India/andamanNicobar',
+      westBengal_india: 'India/westBengal',
+      gujarat_india: 'India/gujarat',
     };
 
     this.clusteringModes = {
@@ -328,7 +434,7 @@ const ChoroplethEditor = {
             district_india: 'Id (1-37)',
           };
           break;
-        case 'district_india':
+        case ((/^[a-zA-Z]+_india$/).test(this.options.mapType)):
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
             <div><code>{{ @@id }}</code> Id (1-732);</div>
