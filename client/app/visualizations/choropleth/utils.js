@@ -121,6 +121,10 @@ export function inferCountryCodeType(mapType, data, countryCodeField) {
       name_local: /^[\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF]+$/i,
       iso_3166_2: /^JP-[0-9]{2}$/i,
     },
+    state_india: {
+      NAME_1: /^[a-z]+$/i,
+      ID_1: /^JP-[0-9]{2}$/i,
+    },
   };
 
   const regex = regexMap[mapType];
