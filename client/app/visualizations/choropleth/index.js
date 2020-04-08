@@ -26,6 +26,7 @@ import editorTemplate from './choropleth-editor.html';
 import countriesDataUrl from './countries.geo.json';
 import subdivJapanDataUrl from './japan.prefectures.geo.json';
 import stateIndiaDataUrl from './india.state.geo.json';
+import districtIndiaDataUrl from './india.district.geo.json';
 
 export const ChoroplethPalette = _.extend({}, AdditionalColors, ColorPalette);
 
@@ -117,6 +118,7 @@ const ChoroplethRenderer = {
         case 'countries': return countriesDataUrl;
         case 'subdiv_japan': return subdivJapanDataUrl;
         case 'state_india': return stateIndiaDataUrl;
+        case 'district_india': return districtIndiaDataUrl;
         default: return '';
       }
     };
@@ -267,6 +269,7 @@ const ChoroplethEditor = {
       countries: 'Countries',
       subdiv_japan: 'Japan/Prefectures',
       state_india: 'India/States',
+      district_india: 'India/Districts',
     };
 
     this.clusteringModes = {
@@ -317,12 +320,22 @@ const ChoroplethEditor = {
           break;
         case 'state_india':
           propDescription = `
-            <div><code>{{ @@NAME_1 }}</code> State name in English;</div>
-            <div><code>{{ @@ID_1 }}</code> Id (1-36);</div>
+            <div><code>{{ @@name }}</code> State name in English;</div>
+            <div><code>{{ @@id }}</code> Id (1-37);</div>
           `;
           this.countryCodeTypes = {
-            NAME_1: 'Name',
-            ID_1: 'Id (1-36)',
+            name: 'Name',
+            district_india: 'Id (1-37)',
+          };
+          break;
+        case 'district_india':
+          propDescription = `
+            <div><code>{{ @@name }}</code> District name in English;</div>
+            <div><code>{{ @@id }}</code> Id (1-732);</div>
+          `;
+          this.countryCodeTypes = {
+            name: 'Name',
+            id: 'Id (1-732)',
           };
           break;
         case 'countries':

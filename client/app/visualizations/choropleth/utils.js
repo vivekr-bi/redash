@@ -122,8 +122,12 @@ export function inferCountryCodeType(mapType, data, countryCodeField) {
       iso_3166_2: /^JP-[0-9]{2}$/i,
     },
     state_india: {
-      NAME_1: /^[a-z]+$/i,
-      ID_1: /^JP-[0-9]{2}$/i,
+      name: /^[a-z]+$/i,
+      id: /^[0-9]{1,2}$/i,
+    },
+    district_india: {
+      name: /^[a-z]+$/i,
+      id: /^[0-9]{1,3}$/i,
     },
   };
 
