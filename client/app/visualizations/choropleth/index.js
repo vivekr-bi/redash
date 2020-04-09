@@ -437,361 +437,361 @@ const ChoroplethEditor = {
         case 'chandigarh_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'dadraNagar_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'delhi_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'puducherry_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'goa_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'damanDiu_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'sikkim_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'tripura_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'meghalaya_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'lakshadweep_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'nagaland_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'manipur_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'mizoram_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'himachalPradesh_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'arunachalPradesh_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'telangana_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'haryana_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'kerala_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'uttarakhand_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'punjab_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'jammuKashmir_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'andhraPradesh_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'jharkhand_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'chhattisgarh_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'assam_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'bihar_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'odisha_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'karnataka_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'tamilNadu_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'rajasthan_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'maharashtra_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'uttarPradesh_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'madhyaPradesh_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'andamanNicobar_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'westBengal_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'gujarat_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id;</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'countries':
