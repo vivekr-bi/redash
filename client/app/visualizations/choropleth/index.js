@@ -27,48 +27,49 @@ import countriesDataUrl from './countries.geo.json';
 import subdivJapanDataUrl from './japan.prefectures.geo.json';
 import stateIndiaDataUrl from './india.state.geo.json';
 
-import chandigarhIndiaDataUrl from './india.chandigarh.geo.json';
-import dadraNagarIndiaDataUrl from './india.dadra_and_nagar_have.geo.json';
-import delhiIndiaDataUrl from './india.delhi.geo.json';
-import puducherryIndiaDataUrl from './india.puducherry.geo.json';
-import goaIndiaDataUrl from './india.goa.geo.json';
-import damanDiuIndiaDataUrl from './india.daman_and_diu.geo.json';
-import sikkimIndiaDataUrl from './india.sikkim.geo.json';
-import tripuraIndiaDataUrl from './india.tripura.geo.json';
-import meghalayaIndiaDataUrl from './india.meghalaya.geo.json';
-import lakshadweepIndiaDataUrl from './india.lakshadweep.geo.json';
-import nagalandIndiaDataUrl from './india.nagaland.geo.json';
-import manipurIndiaDataUrl from './india.manipur.geo.json';
-import mizoramIndiaDataUrl from './india.mizoram.geo.json';
-import himachalPradeshIndiaDataUrl from './india.himachal_pradesh.geo.json';
-import arunachalPradeshIndiaDataUrl from './india.arunachal_pradesh.geo.json';
-import telanganaIndiaDataUrl from './india.telangana.geo.json';
-import haryanaIndiaDataUrl from './india.haryana.geo.json';
-import keralaIndiaDataUrl from './india.kerala.geo.json';
-import uttarakhandIndiaDataUrl from './india.uttarakhand.geo.json';
-import punjabIndiaDataUrl from './india.punjab.geo.json';
-import jammuKashmirIndiaDataUrl from './india.jammu_and_kashmir.geo.json';
+import andamanNicobarIndiaDataUrl from './india.andaman_and_nicobar.geo.json';
 import andhraPradeshIndiaDataUrl from './india.andhra_pradesh.geo.json';
-import jharkhandIndiaDataUrl from './india.jharkhand.geo.json';
-import chhattisgarhIndiaDataUrl from './india.chhattisgarh.geo.json';
+import arunachalPradeshIndiaDataUrl from './india.arunachal_pradesh.geo.json';
 import assamIndiaDataUrl from './india.assam.geo.json';
 import biharIndiaDataUrl from './india.bihar.geo.json';
-import odishaIndiaDataUrl from './india.odisha.geo.json';
-import karnatakaIndiaDataUrl from './india.karnataka.geo.json';
-import tamilNaduIndiaDataUrl from './india.tamil_nadu.geo.json';
-import rajasthanIndiaDataUrl from './india.rajasthan.geo.json';
-import maharashtraIndiaDataUrl from './india.maharashtra.geo.json';
-import uttarPradeshIndiaDataUrl from './india.uttar_pradesh.geo.json';
-import madhyaPradeshIndiaDataUrl from './india.madhya_pradesh.geo.json';
-import andamanNicobarIndiaDataUrl from './india.andaman_and_nicobar.geo.json';
-import westBengalIndiaDataUrl from './india.west_bengal.geo.json';
+import chandigarhIndiaDataUrl from './india.chandigarh.geo.json';
+import chhattisgarhIndiaDataUrl from './india.chhattisgarh.geo.json';
+import dadraNagarIndiaDataUrl from './india.dadra_and_nagar_have.geo.json';
+import damanDiuIndiaDataUrl from './india.daman_and_diu.geo.json';
+import delhiIndiaDataUrl from './india.delhi.geo.json';
+import goaIndiaDataUrl from './india.goa.geo.json';
 import gujaratIndiaDataUrl from './india.gujarat.geo.json';
+import haryanaIndiaDataUrl from './india.haryana.geo.json';
+import himachalPradeshIndiaDataUrl from './india.himachal_pradesh.geo.json';
+import jammuKashmirIndiaDataUrl from './india.jammu_and_kashmir.geo.json';
+import jharkhandIndiaDataUrl from './india.jharkhand.geo.json';
+import karnatakaIndiaDataUrl from './india.karnataka.geo.json';
+import keralaIndiaDataUrl from './india.kerala.geo.json';
+import lakshadweepIndiaDataUrl from './india.lakshadweep.geo.json';
+import madhyaPradeshIndiaDataUrl from './india.madhya_pradesh.geo.json';
+import maharashtraIndiaDataUrl from './india.maharashtra.geo.json';
+import manipurIndiaDataUrl from './india.manipur.geo.json';
+import meghalayaIndiaDataUrl from './india.meghalaya.geo.json';
+import mizoramIndiaDataUrl from './india.mizoram.geo.json';
+import nagalandIndiaDataUrl from './india.nagaland.geo.json';
+import odishaIndiaDataUrl from './india.odisha.geo.json';
+import puducherryIndiaDataUrl from './india.puducherry.geo.json';
+import punjabIndiaDataUrl from './india.punjab.geo.json';
+import rajasthanIndiaDataUrl from './india.rajasthan.geo.json';
+import sikkimIndiaDataUrl from './india.sikkim.geo.json';
+import tamilNaduIndiaDataUrl from './india.tamil_nadu.geo.json';
+import telanganaIndiaDataUrl from './india.telangana.geo.json';
+import tripuraIndiaDataUrl from './india.tripura.geo.json';
+import uttarakhandIndiaDataUrl from './india.uttarakhand.geo.json';
+import uttarPradeshIndiaDataUrl from './india.uttar_pradesh.geo.json';
+import westBengalIndiaDataUrl from './india.west_bengal.geo.json';
 
 export const ChoroplethPalette = _.extend({}, AdditionalColors, ColorPalette);
 
 const DEFAULT_OPTIONS = {
   mapType: 'countries',
   countryCodeColumn: '',
+  indiaStateColumn: '',
   countryCodeType: 'iso_a3',
   valueColumn: '',
   clusteringMode: 'e',
@@ -149,52 +150,57 @@ const ChoroplethRenderer = {
       }
     };
 
-    const getDataUrl = (type) => {
+    const getDataUrl = (type, indiaStateName) => {
       switch (type) {
         case 'countries': return countriesDataUrl;
         case 'subdiv_japan': return subdivJapanDataUrl;
         case 'state_india': return stateIndiaDataUrl;
-        case 'chandigarh_india': return chandigarhIndiaDataUrl;
-        case 'dadraNagar_india': return dadraNagarIndiaDataUrl;
-        case 'delhi_india': return delhiIndiaDataUrl;
-        case 'puducherry_india': return puducherryIndiaDataUrl;
-        case 'goa_india': return goaIndiaDataUrl;
-        case 'damanDiu_india': return damanDiuIndiaDataUrl;
-        case 'sikkim_india': return sikkimIndiaDataUrl;
-        case 'tripura_india': return tripuraIndiaDataUrl;
-        case 'meghalaya_india': return meghalayaIndiaDataUrl;
-        case 'lakshadweep_india': return lakshadweepIndiaDataUrl;
-        case 'nagaland_india': return nagalandIndiaDataUrl;
-        case 'manipur_india': return manipurIndiaDataUrl;
-        case 'mizoram_india': return mizoramIndiaDataUrl;
-        case 'himachalPradesh_india': return himachalPradeshIndiaDataUrl;
-        case 'arunachalPradesh_india': return arunachalPradeshIndiaDataUrl;
-        case 'telangana_india': return telanganaIndiaDataUrl;
-        case 'haryana_india': return haryanaIndiaDataUrl;
-        case 'kerala_india': return keralaIndiaDataUrl;
-        case 'uttarakhand_india': return uttarakhandIndiaDataUrl;
-        case 'punjab_india': return punjabIndiaDataUrl;
-        case 'jammuKashmir_india': return jammuKashmirIndiaDataUrl;
-        case 'andhraPradesh_india': return andhraPradeshIndiaDataUrl;
-        case 'jharkhand_india': return jharkhandIndiaDataUrl;
-        case 'chhattisgarh_india': return chhattisgarhIndiaDataUrl;
-        case 'assam_india': return assamIndiaDataUrl;
-        case 'bihar_india': return biharIndiaDataUrl;
-        case 'odisha_india': return odishaIndiaDataUrl;
-        case 'karnataka_india': return karnatakaIndiaDataUrl;
-        case 'tamilNadu_india': return tamilNaduIndiaDataUrl;
-        case 'rajasthan_india': return rajasthanIndiaDataUrl;
-        case 'maharashtra_india': return maharashtraIndiaDataUrl;
-        case 'uttarPradesh_india': return uttarPradeshIndiaDataUrl;
-        case 'madhyaPradesh_india': return madhyaPradeshIndiaDataUrl;
-        case 'andamanNicobar_india': return andamanNicobarIndiaDataUrl;
-        case 'westBengal_india': return westBengalIndiaDataUrl;
-        case 'gujarat_india': return gujaratIndiaDataUrl;
+        case 'state_wise_india': {
+          switch (indiaStateName) {
+            case 'ANDAMAN & NICOBAR': return andamanNicobarIndiaDataUrl;
+            case 'ANDHRA PRADESH': return andhraPradeshIndiaDataUrl;
+            case 'ARUNACHAL PRADESH': return arunachalPradeshIndiaDataUrl;
+            case 'ASSAM': return assamIndiaDataUrl;
+            case 'BIHAR': return biharIndiaDataUrl;
+            case 'CHANDIGARH': return chandigarhIndiaDataUrl;
+            case 'CHHATTISGARH': return chhattisgarhIndiaDataUrl;
+            case 'DADRA & NAGAR HAVE': return dadraNagarIndiaDataUrl;
+            case 'DAMAN & DIU': return damanDiuIndiaDataUrl;
+            case 'DELHI': return delhiIndiaDataUrl;
+            case 'GOA': return goaIndiaDataUrl;
+            case 'GUJARAT': return gujaratIndiaDataUrl;
+            case 'HARYANA': return haryanaIndiaDataUrl;
+            case 'HIMACHAL PRADESH': return himachalPradeshIndiaDataUrl;
+            case 'JAMMU & KASHMIR': return jammuKashmirIndiaDataUrl;
+            case 'JHARKHAND': return jharkhandIndiaDataUrl;
+            case 'KARNATAKA': return karnatakaIndiaDataUrl;
+            case 'KERALA': return keralaIndiaDataUrl;
+            case 'LAKSHADWEEP': return lakshadweepIndiaDataUrl;
+            case 'MADHYA PRADESH': return madhyaPradeshIndiaDataUrl;
+            case 'MAHARASHTRA': return maharashtraIndiaDataUrl;
+            case 'MANIPUR': return manipurIndiaDataUrl;
+            case 'MEGHALAYA': return meghalayaIndiaDataUrl;
+            case 'MIZORAM': return mizoramIndiaDataUrl;
+            case 'NAGALAND': return nagalandIndiaDataUrl;
+            case 'ODISHA': return odishaIndiaDataUrl;
+            case 'PUDUCHERRY': return puducherryIndiaDataUrl;
+            case 'PUNJAB': return punjabIndiaDataUrl;
+            case 'RAJASTHAN': return rajasthanIndiaDataUrl;
+            case 'SIKKIM': return sikkimIndiaDataUrl;
+            case 'TAMIL NADU': return tamilNaduIndiaDataUrl;
+            case 'TELANGANA': return telanganaIndiaDataUrl;
+            case 'TRIPURA': return tripuraIndiaDataUrl;
+            case 'UTTAR PRADESH': return uttarakhandIndiaDataUrl;
+            case 'UTTARAKHAND': return uttarPradeshIndiaDataUrl;
+            case 'WEST BENGAL': return westBengalIndiaDataUrl;
+            default: return stateIndiaDataUrl;
+          }
+        }
         default: return '';
       }
     };
 
-    let dataUrl = getDataUrl(this.options.mapType);
+    let dataUrl = getDataUrl(this.options.mapType, this.indiaStateName);
 
     const render = () => {
       if (map) {
@@ -315,9 +321,14 @@ const ChoroplethRenderer = {
     $scope.$watch(() => _.omit(this.options, 'bounds', 'mapType'), render, true);
     $scope.$watch('$ctrl.options.bounds', updateBounds, true);
     $scope.$watch('$ctrl.options.mapType', () => {
-      dataUrl = getDataUrl(this.options.mapType);
+      dataUrl = getDataUrl(this.options.mapType, this.indiaStateName);
       load();
     }, true);
+    $scope.$watch('$ctrl.options.indiaStateColumn', () => {
+      this.indiaStateName = this.data.rows[0][this.options.indiaStateColumn];
+      dataUrl = getDataUrl(this.options.mapType, this.indiaStateName);
+      load();
+    });
   },
 };
 
@@ -338,44 +349,9 @@ const ChoroplethEditor = {
 
     this.mapTypes = {
       countries: 'Countries',
+      state_india: 'India',
+      state_wise_india: 'India/States',
       subdiv_japan: 'Japan/Prefectures',
-      state_india: 'India/States',
-      chandigarh_india: 'India/chandigarh',
-      dadraNagar_india: 'India/dadraNagar',
-      delhi_india: 'India/delhi',
-      puducherry_india: 'India/puducherry',
-      goa_india: 'India/goa',
-      damanDiu_india: 'India/damanDiu',
-      sikkim_india: 'India/sikkim',
-      tripura_india: 'India/tripura',
-      meghalaya_india: 'India/meghalaya',
-      lakshadweep_india: 'India/lakshadweep',
-      nagaland_india: 'India/nagaland',
-      manipur_india: 'India/manipur',
-      mizoram_india: 'India/mizoram',
-      himachalPradesh_india: 'India/himachalPradesh',
-      arunachalPradesh_india: 'India/arunachalPradesh',
-      telangana_india: 'India/telangana',
-      haryana_india: 'India/haryana',
-      kerala_india: 'India/kerala',
-      uttarakhand_india: 'India/uttarakhand',
-      punjab_india: 'India/punjab',
-      jammuKashmir_india: 'India/jammuKashmir',
-      andhraPradesh_india: 'India/andhraPradesh',
-      jharkhand_india: 'India/jharkhand',
-      chhattisgarh_india: 'India/chhattisgarh',
-      assam_india: 'India/assam',
-      bihar_india: 'India/bihar',
-      odisha_india: 'India/odisha',
-      karnataka_india: 'India/karnataka',
-      tamilNadu_india: 'India/tamilNadu',
-      rajasthan_india: 'India/rajasthan',
-      maharashtra_india: 'India/maharashtra',
-      uttarPradesh_india: 'India/uttarPradesh',
-      madhyaPradesh_india: 'India/madhyaPradesh',
-      andamanNicobar_india: 'India/andamanNicobar',
-      westBengal_india: 'India/westBengal',
-      gujarat_india: 'India/gujarat',
     };
 
     this.clusteringModes = {
@@ -393,6 +369,8 @@ const ChoroplethEditor = {
 
     this.countryCodeTypes = {};
 
+    this.indiaStateName = '';
+
     this.templateHintFormatter = propDescription => `
       <div class="p-b-5">All query result columns can be referenced using <code>{{ column_name }}</code> syntax.</div>
       <div class="p-b-5">Use special names to access additional properties:</div>
@@ -407,6 +385,10 @@ const ChoroplethEditor = {
         this.data ? this.data.rows : [],
         this.options.countryCodeColumn,
       ) || this.options.countryCodeType;
+    };
+
+    const updateIndianState = () => {
+      this.indiaStateName = this.data.rows[0][this.options.indiaStateColumn];
     };
 
     const populateCountryCodeTypes = () => {
@@ -434,364 +416,14 @@ const ChoroplethEditor = {
             state_id: 'Id (1-37)',
           };
           break;
-        case 'chandigarh_india':
+        case 'state_wise_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
+            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'dadraNagar_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'delhi_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'puducherry_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'goa_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'damanDiu_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'sikkim_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'tripura_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'meghalaya_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'lakshadweep_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'nagaland_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'manipur_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'mizoram_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'himachalPradesh_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'arunachalPradesh_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'telangana_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'haryana_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'kerala_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'uttarakhand_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'punjab_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'jammuKashmir_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'andhraPradesh_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'jharkhand_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'chhattisgarh_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'assam_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'bihar_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'odisha_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'karnataka_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'tamilNadu_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'rajasthan_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'maharashtra_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'uttarPradesh_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'madhyaPradesh_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'andamanNicobar_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'westBengal_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
-          };
-          break;
-        case 'gujarat_india':
-          propDescription = `
-            <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> District Id;</div>
-          `;
-          this.countryCodeTypes = {
-            name: 'Name',
-            district_id: 'District Id',
+            district_id: 'Id (1-732)',
           };
           break;
         case 'countries':
@@ -819,6 +451,7 @@ const ChoroplethEditor = {
     };
 
     $scope.$watch('$ctrl.options.mapType', populateCountryCodeTypes);
+    $scope.$watch('$ctrl.options.indiaStateColumn', updateIndianState);
     $scope.$watch('$ctrl.options.countryCodeColumn', updateCountryCodeType);
     $scope.$watch('$ctrl.data', updateCountryCodeType);
 

@@ -19,6 +19,13 @@
             ng-model="$ctrl.options.mapType" class="form-control"></select>
         </div>
       </div>
+      <div ng-if="$ctrl.options.mapType == 'state_wise_india'" class="col-xs-6">
+        <div class="form-group">
+          <label>State Column</label>
+          <select ng-options="col.name as col.name for col in $ctrl.data.columns"
+            ng-model="$ctrl.options.indiaStateColumn" class="form-control"></select>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-xs-6">
