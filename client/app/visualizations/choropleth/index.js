@@ -150,6 +150,16 @@ const ChoroplethRenderer = {
       }
     };
 
+    const getIndiaState = (column) => {
+      console.log(column);
+      console.log(this.data.rows[0][column]);
+      console.log(this.data.columns);
+      console.log(_.isString(this.data.rows[0][column]));
+      if (_.isString(this.data.rows[0][column])) {
+        return this.data.rows[0][column].toUpperCase();
+      }
+    };
+
     const getDataUrl = (type, indiaStateName) => {
       switch (type) {
         case 'countries': return countriesDataUrl;
@@ -200,7 +210,9 @@ const ChoroplethRenderer = {
       }
     };
 
-    let dataUrl = getDataUrl(this.options.mapType, this.indiaStateName);
+    let indiaStateName = getIndiaState(this.options.indiaStateColumn);
+
+    let dataUrl = getDataUrl(this.options.mapType, indiaStateName);
 
     const render = () => {
       if (map) {
@@ -317,18 +329,18 @@ const ChoroplethRenderer = {
       }
     }, 50);
 
+    const updateCountryMap = () => {
+      indiaStateName = getIndiaState(this.options.indiaStateColumn);
+      console.log(indiaStateName);
+      dataUrl = getDataUrl(this.options.mapType, indiaStateName);
+      load();
+    };
+
     $scope.$watch('$ctrl.data', render);
     $scope.$watch(() => _.omit(this.options, 'bounds', 'mapType'), render, true);
     $scope.$watch('$ctrl.options.bounds', updateBounds, true);
-    $scope.$watch('$ctrl.options.mapType', () => {
-      dataUrl = getDataUrl(this.options.mapType, this.indiaStateName);
-      load();
-    }, true);
-    $scope.$watch('$ctrl.options.indiaStateColumn', () => {
-      this.indiaStateName = this.data.rows[0][this.options.indiaStateColumn];
-      dataUrl = getDataUrl(this.options.mapType, this.indiaStateName);
-      load();
-    });
+    $scope.$watch('$ctrl.options.mapType', updateCountryMap, true);
+    $scope.$watch('$ctrl.options.indiaStateColumn', updateCountryMap, true);
   },
 };
 
@@ -369,8 +381,6 @@ const ChoroplethEditor = {
 
     this.countryCodeTypes = {};
 
-    this.indiaStateName = '';
-
     this.templateHintFormatter = propDescription => `
       <div class="p-b-5">All query result columns can be referenced using <code>{{ column_name }}</code> syntax.</div>
       <div class="p-b-5">Use special names to access additional properties:</div>
@@ -385,10 +395,6 @@ const ChoroplethEditor = {
         this.data ? this.data.rows : [],
         this.options.countryCodeColumn,
       ) || this.options.countryCodeType;
-    };
-
-    const updateIndianState = () => {
-      this.indiaStateName = this.data.rows[0][this.options.indiaStateColumn];
     };
 
     const populateCountryCodeTypes = () => {
@@ -409,21 +415,21 @@ const ChoroplethEditor = {
         case 'state_india':
           propDescription = `
             <div><code>{{ @@name }}</code> State name in English;</div>
-            <div><code>{{ @@state_id }}</code> Id (1-37);</div>
+            <div><code>{{ @@state_id }}</code> State Id (1-37);</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            state_id: 'Id (1-37)',
+            state_id: 'State Id',
           };
           break;
         case 'state_wise_india':
           propDescription = `
             <div><code>{{ @@name }}</code> District name in English;</div>
-            <div><code>{{ @@district_id }}</code> Id (1-732);</div>
+            <div><code>{{ @@district_id }}</code> District Id (1-732);</div>
           `;
           this.countryCodeTypes = {
             name: 'Name',
-            district_id: 'Id (1-732)',
+            district_id: 'District Id',
           };
           break;
         case 'countries':
@@ -451,7 +457,6 @@ const ChoroplethEditor = {
     };
 
     $scope.$watch('$ctrl.options.mapType', populateCountryCodeTypes);
-    $scope.$watch('$ctrl.options.indiaStateColumn', updateIndianState);
     $scope.$watch('$ctrl.options.countryCodeColumn', updateCountryCodeType);
     $scope.$watch('$ctrl.data', updateCountryCodeType);
 
