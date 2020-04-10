@@ -98,7 +98,7 @@ class User(TimestampMixin, db.Model, BelongsToOrgMixin, UserMixin, PermissionsCh
                                    default=None)
     is_invitation_pending = json_cast_property(db.Boolean(True), 'details', 'is_invitation_pending', default=False)
     is_email_verified = json_cast_property(db.Boolean(True), 'details', 'is_email_verified', default=True)
-    restricting_parameters = json_cast_property(db.String(800), 'details', 'restricting_parameters', default='{}')
+    restricting_parameters = json_cast_property(MutableDict.as_mutable(postgresql.JSON), 'details', 'restricting_parameters', default={})
 
     __tablename__ = 'users'
     __table_args__ = (
