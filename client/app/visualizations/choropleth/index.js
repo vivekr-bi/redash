@@ -151,10 +151,6 @@ const ChoroplethRenderer = {
     };
 
     const getIndiaState = (column) => {
-      console.log(column);
-      console.log(this.data.rows[0][column]);
-      console.log(this.data.columns);
-      console.log(_.isString(this.data.rows[0][column]));
       if (_.isString(this.data.rows[0][column])) {
         return this.data.rows[0][column].toUpperCase();
       }
