@@ -10,7 +10,7 @@ from redash.permissions import (has_access, not_view_only, require_access,
                                 require_permission, view_only)
 from redash.tasks import QueryTask
 from redash.tasks.queries import enqueue_query
-from redash.utils import (collect_parameters_from_request, gen_query_hash, json_dumps, utcnow, to_filename)
+from redash.utils import (collect_parameters_from_request, gen_query_hash, json_dumps, json_loads, utcnow, to_filename)
 from redash.models.parameterized_query import (ParameterizedQuery, InvalidParameterError,
                                                QueryDetachedFromDataSourceError, dropdown_values)
 from redash.serializers import serialize_query_result, serialize_query_result_to_csv, serialize_query_result_to_xlsx
@@ -44,6 +44,21 @@ def run_query(query, parameters, data_source, query_id, max_age=0):
 
     if query.missing_params:
         return error_response(u'Missing parameter value for: {}'.format(u", ".join(query.missing_params)))
+
+    logger = logging.getLogger(__name__)
+    logger.info('params = {}, user = {}'.format(current_user.restricting_parameters, str(current_user)))
+    if current_user.restricting_parameters != '' and current_user.restricting_parameters != '{}':
+        try:
+            restricting_params = json_loads(current_user.restricting_parameters)
+            for restrict_param in restricting_params:
+                if restrict_param in parameters:
+                    if parameters[restrict_param].lower() in restricting_params[restrict_param]:
+                        continue
+                    else:
+                        logger.info('You do not have access to view {} with value {}'.format(restrict_param, parameters[restrict_param]))
+                        return error_response('You do not have access to view {} with value {}'.format(restrict_param, parameters[restrict_param]))
+        except (ValueError) as e:
+            logger.info('JSON parse Error')
 
     if max_age == 0:
         query_result = None
