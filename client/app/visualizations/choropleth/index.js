@@ -327,7 +327,6 @@ const ChoroplethRenderer = {
 
     const updateCountryMap = () => {
       indiaStateName = getIndiaState(this.options.indiaStateColumn);
-      console.log(indiaStateName);
       dataUrl = getDataUrl(this.options.mapType, indiaStateName);
       load();
     };
