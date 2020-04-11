@@ -199,7 +199,7 @@ const ChoroplethRenderer = {
             case 'UTTAR PRADESH': return uttarakhandIndiaDataUrl;
             case 'UTTARAKHAND': return uttarPradeshIndiaDataUrl;
             case 'WEST BENGAL': return westBengalIndiaDataUrl;
-            default: return stateIndiaDataUrl;
+            default: return delhiIndiaDataUrl;
           }
         }
         default: return '';
