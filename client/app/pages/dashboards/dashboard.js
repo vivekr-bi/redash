@@ -228,14 +228,18 @@ function DashboardCtrl(
       const contentDataURL = canvas.toDataURL('image/png');
       let imgWidth = canvas.width;
       let imgHeight = canvas.height;
-      if (adjust) {
+      if (adjust || imgWidth > pageWidth) {
         imgHeight = canvas.height * pageWidth / canvas.width;
         imgWidth = pageWidth;
       }
-      if (imgHeight > heightLeft) {
+      if (imgHeight > heightLeft && position > 0) {
         pdf.addPage();
         position = 0;
         heightLeft = pageHeight;
+      }
+      if (imgHeight > pageHeight) {
+        // TODO: handle it with a loop within
+        console.log('Very big image');
       }
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       heightLeft -= imgHeight;
@@ -255,7 +259,7 @@ function DashboardCtrl(
     const data2 = document.getElementById('second-download-content');
 
     getImage(data1);
-    setTimeout(() => { getImage(data2, false, true); }, 1);
+    setTimeout(() => { getImage(data2, false, true); }, 5);
 
     setTimeout(() => {
       const widgets = document.getElementsByClassName('widget-visualization');
@@ -271,7 +275,7 @@ function DashboardCtrl(
         }
         i += 1;
       }
-    }, 2);
+    }, 5);
 
     this.isDownloading = false;
   };
