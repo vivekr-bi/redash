@@ -216,7 +216,7 @@ function DashboardCtrl(
   this.downloadDashboard = () => {
     this.isDownloading = true;
 
-    const pdf = new Jspdf('l', 'pt', 'a4');
+    const pdf = new Jspdf('p', 'pt', 'a3');
     pdf.setFillColor(245);
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
