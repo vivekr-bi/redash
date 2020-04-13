@@ -36,6 +36,7 @@ const MULTI = 'multi-column';
 class DashboardGrid extends React.Component {
   static propTypes = {
     isEditing: PropTypes.bool.isRequired,
+    downloading: PropTypes.bool.isRequired,
     isPublic: PropTypes.bool,
     dashboard: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
     widgets: PropTypes.arrayOf(WidgetType).isRequired,
@@ -200,6 +201,7 @@ class DashboardGrid extends React.Component {
                 filters={this.props.filters}
                 deleted={() => onRemoveWidget(widget.id)}
                 public={this.props.isPublic}
+                download={this.props.downloading}
               />
             </div>
           ))}

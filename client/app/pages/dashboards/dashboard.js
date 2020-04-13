@@ -1,4 +1,6 @@
 import * as _ from 'lodash';
+import * as Jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 import PromiseRejectionError from '@/lib/promise-rejection-error';
 import getTags from '@/services/getTags';
 import { policy } from '@/services/policy';
@@ -100,6 +102,7 @@ function DashboardCtrl(
 
   // dashboard vars
   this.isFullscreen = false;
+  this.isDownloading = false;
   this.refreshRate = null;
   this.showPermissionsControl = clientConfig.showPermissionsControl;
   this.globalParameters = [];
@@ -209,6 +212,69 @@ function DashboardCtrl(
   }, 1000);
 
   this.loadDashboard();
+
+  this.downloadDashboard = () => {
+    this.isDownloading = true;
+
+    const pdf = new Jspdf('l', 'pt', 'a4');
+    pdf.setFillColor(245);
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    let heightLeft = pageHeight;
+    let position = 0;
+
+    const addImage = (canvas, save, adjust) => {
+      const contentDataURL = canvas.toDataURL('image/png');
+      let imgWidth = canvas.width;
+      let imgHeight = canvas.height;
+      if (adjust) {
+        imgHeight = canvas.height * pageWidth / canvas.width;
+        imgWidth = pageWidth;
+      }
+      if (imgHeight > heightLeft) {
+        pdf.addPage();
+        position = 0;
+        heightLeft = pageHeight;
+      }
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= imgHeight;
+      position += imgHeight;
+      if (save) {
+        setTimeout(() => { pdf.save('Dashboard.pdf'); }, 1);
+      }
+    };
+
+    const getImage = (data, save, adjust) => {
+      html2canvas(data).then((canvas) => {
+        addImage(canvas, save, adjust);
+      });
+    };
+
+    const data1 = document.getElementById('first-download-content');
+    const data2 = document.getElementById('second-download-content');
+
+    getImage(data1);
+    setTimeout(() => { getImage(data2, false, true); }, 1);
+
+    setTimeout(() => {
+      const widgets = document.getElementsByClassName('widget-visualization');
+      const counters = document.getElementsByClassName('counter-visualization-content');
+      let i = 1;
+      let j = 0;
+      for (let widget of widgets) {
+        if (widget.innerHTML.indexOf('counter-visualization-content') !== -1) {
+          getImage(counters[j], (i === widgets.length));
+          j += 1;
+        } else {
+          getImage(widget, (i === widgets.length));
+        }
+        i += 1;
+      }
+    }, 2);
+
+    this.isDownloading = false;
+  };
 
   this.refreshDashboard = (parameters) => {
     this.refreshInProgress = true;

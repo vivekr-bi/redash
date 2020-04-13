@@ -123,6 +123,7 @@ const DashboardWidgetOptions = {
     dashboard: '<',
     filters: '<',
     deleted: '<',
+    download: '<',
   },
 };
 
