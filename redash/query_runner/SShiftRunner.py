@@ -5,7 +5,6 @@ from redash.utils import json_dumps, json_loads
 import grpc
 import gsshift_pb2
 import gsshift_pb2_grpc
-from json2html import *
 
 class SShiftRunner(BaseQueryRunner):
     should_annotate_query = False
