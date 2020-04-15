@@ -6,7 +6,8 @@ import grpc
 import gsshift_pb2
 import gsshift_pb2_grpc
 
-class SShiftRunner(BaseQueryRunner):
+
+class SShiftRunner(BaseSQLQueryRunner):
     should_annotate_query = False
 
     @classmethod
@@ -40,17 +41,6 @@ class SShiftRunner(BaseQueryRunner):
     @classmethod
     def enabled(cls):
         return True
-    @classmethod
-    def annotate_query(cls):
-        return False
-
-    @classmethod
-    def type(cls):
-        return "SShiftRunner"
-
-    @classmethod
-    def name(cls):
-        return "SShiftRunner"
 
     def __init__(self, configuration):
         super(SShiftRunner, self).__init__(configuration)
@@ -96,7 +86,9 @@ class SShiftRunner(BaseQueryRunner):
             return {"error_msg": None}
 
     def run_query(self, query, user):
-        query_json = json_loads(query)
+        print(query)
+        print(type(query))
+        query_json = json_loads.loads(query)
         query_json = self.load_default(query_json)
         validation = self.validate_parameters(query_json)
 
@@ -116,7 +108,7 @@ class SShiftRunner(BaseQueryRunner):
         if not validation["error_msg"]:
             try:
 
-                with grpc.insecure_channel('[::]:50055') as channel:
+                with grpc.insecure_channel('localhost:50055') as channel:
                     stub = gsshift_pb2_grpc.SshiftStub(channel)
                     message = stub.Runner(
                         gsshift_pb2.Input(spreadsheet_id=spreadsheet_id, sheet_name=sheet_name, table_name=table_name,
@@ -136,4 +128,3 @@ class SShiftRunner(BaseQueryRunner):
 
 
 register(SShiftRunner)
-
