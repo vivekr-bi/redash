@@ -107,7 +107,7 @@ class SShiftRunner(BaseSQLQueryRunner):
         if not validation["error_msg"]:
             try:
 
-                with grpc.insecure_channel('localhost:50055') as channel:
+                with grpc.insecure_channel('sshift:50055') as channel:
                     stub = gsshift_pb2_grpc.SshiftStub(channel)
                     message = stub.Runner(
                         gsshift_pb2.Input(spreadsheet_id=spreadsheet_id, sheet_name=sheet_name, table_name=table_name,
