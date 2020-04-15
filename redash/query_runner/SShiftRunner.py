@@ -88,7 +88,7 @@ class SShiftRunner(BaseSQLQueryRunner):
     def run_query(self, query, user):
         print(query)
         print(type(query))
-        query_json = json_loads.loads(query)
+        query_json = json_loads(query)
         query_json = self.load_default(query_json)
         validation = self.validate_parameters(query_json)
 
