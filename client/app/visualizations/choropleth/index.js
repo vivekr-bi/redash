@@ -196,8 +196,8 @@ const ChoroplethRenderer = {
             case 'TAMIL NADU': return tamilNaduIndiaDataUrl;
             case 'TELANGANA': return telanganaIndiaDataUrl;
             case 'TRIPURA': return tripuraIndiaDataUrl;
-            case 'UTTAR PRADESH': return uttarakhandIndiaDataUrl;
-            case 'UTTARAKHAND': return uttarPradeshIndiaDataUrl;
+            case 'UTTARAKHAND': return uttarakhandIndiaDataUrl;
+            case 'UTTAR PRADESH': return uttarPradeshIndiaDataUrl;
             case 'WEST BENGAL': return westBengalIndiaDataUrl;
             default: return delhiIndiaDataUrl;
           }
