@@ -98,7 +98,6 @@ class User(TimestampMixin, db.Model, BelongsToOrgMixin, UserMixin, PermissionsCh
                                    default=None)
     is_invitation_pending = json_cast_property(db.Boolean(True), 'details', 'is_invitation_pending', default=False)
     is_email_verified = json_cast_property(db.Boolean(True), 'details', 'is_email_verified', default=True)
-    restricting_parameters = json_cast_property(MutableDict.as_mutable(postgresql.JSON), 'details', 'restricting_parameters', default={})
 
     __tablename__ = 'users'
     __table_args__ = (
@@ -230,6 +229,42 @@ class User(TimestampMixin, db.Model, BelongsToOrgMixin, UserMixin, PermissionsCh
         db.session.add(self)
         db.session.commit()
 
+    def is_allowed_access(self, tags, parameters={}):
+        error_message = ''
+        tags_result = set()
+        restricting_params_result = {}
+        for g in Group.query.filter(Group.id.in_(self.group_ids)):
+            tags_result |= set(g.allowed_tags)
+            for k in g.restricting_parameters:
+                if k.lower() in restricting_params_result:
+                    restricting_params_result[k.lower()].extend(g.restricting_parameters[k])
+                else:
+                    restricting_params_result[k.lower()] = g.restricting_parameters[k]
+        restricting_parameters = {k: list(set(restricting_params_result[k])) for k in restricting_params_result}
+        allowed_tags = list(tags_result)
+        all_allowed_tags = Group.query.filter(Group.id == 1)[0].allowed_tags
+
+        if tags and all_allowed_tags and list(set(all_allowed_tags) & set(tags)) != []:
+            tags_to_check = list(set(all_allowed_tags) & set(tags))
+            flag = 0
+            for tag in tags_to_check:
+                if tag in allowed_tags:
+                    flag = 1
+                    break
+            if flag == 0:
+                error_message = 'You do not have access to view {} data. Please contact your administrator.'.format('/'.join(tags_to_check))
+                return error_message, parameters
+
+        if parameters and parameters != {} and restricting_parameters and restricting_parameters != {}:
+            lower_parameters = {k.lower(): { 'parameter': parameters[k].lower(), 'original_key': k } for k in parameters}
+            for restrict_param in restricting_parameters:
+                if 'all' in restricting_parameters[restrict_param]:
+                    continue
+                if restrict_param in lower_parameters:
+                    if lower_parameters[restrict_param]['parameter'] not in restricting_parameters[restrict_param]:
+                        parameters[lower_parameters[restrict_param]['original_key']] = restricting_parameters[restrict_param][0]
+        return error_message, parameters
+
     def has_access(self, obj, access_type):
         return AccessPermission.exists(obj, access_type, grantee=self)
 
@@ -260,6 +295,10 @@ class Group(db.Model, BelongsToOrgMixin):
     permissions = Column(postgresql.ARRAY(db.String(255)),
                          default=DEFAULT_PERMISSIONS)
     created_at = Column(db.DateTime(True), default=db.func.now())
+    details = Column(MutableDict.as_mutable(postgresql.JSON), nullable=True,
+                     server_default='{}', default={})
+    restricting_parameters = json_cast_property(MutableDict.as_mutable(postgresql.JSON), 'details', 'restricting_parameters', default={})
+    allowed_tags = json_cast_property(MutableDict.as_mutable(postgresql.JSON), 'details', 'allowed_tags', default=[])
 
     __tablename__ = 'groups'
 
