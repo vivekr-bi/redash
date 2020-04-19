@@ -109,6 +109,8 @@ class DashboardListResource(BaseResource):
         models.db.session.commit()
         return serialize_dashboard(dashboard)
 
+def error_response(message, http_status=400):
+    return {'job': {'status': 4, 'error': message}}, http_status
 
 class DashboardResource(BaseResource):
     @require_permission('list_dashboards')
@@ -147,6 +149,9 @@ class DashboardResource(BaseResource):
         :>json string widget.updated_at: ISO format timestamp for last widget modification
         """
         dashboard = get_object_or_404(models.Dashboard.get_by_slug_and_org, dashboard_slug, self.current_org)
+        error_message, _ = self.current_user.is_allowed_access(dashboard.tags)
+        if error_message and error_message != '':
+            return error_response(error_message)
         response = serialize_dashboard(dashboard, with_widgets=True, user=self.current_user)
 
         api_key = models.ApiKey.get_by_object(dashboard)

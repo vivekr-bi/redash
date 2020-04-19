@@ -28,7 +28,7 @@ error_messages = {
 }
 
 
-def run_query(query, parameters, data_source, query_id, max_age=0):
+def run_query(query, parameters, data_source, query_id, query_tags=[], max_age=0):
     if data_source.paused:
         if data_source.pause_reason:
             message = '{} is paused ({}). Please try later.'.format(data_source.name, data_source.pause_reason)
@@ -37,6 +37,10 @@ def run_query(query, parameters, data_source, query_id, max_age=0):
 
         return error_response(message)
 
+    error_message, parameters = current_user.is_allowed_access(query_tags, parameters)
+    if error_message and error_message != '':
+        return error_response(error_message)
+
     try:
         query.apply(parameters)
     except (InvalidParameterError, QueryDetachedFromDataSourceError) as e:
@@ -44,16 +48,6 @@ def run_query(query, parameters, data_source, query_id, max_age=0):
 
     if query.missing_params:
         return error_response(u'Missing parameter value for: {}'.format(u", ".join(query.missing_params)))
-
-    if current_user.restricting_parameters and current_user.restricting_parameters != '{}':
-        restricting_params = {k.lower(): [v.lower() for v in current_user.restricting_parameters[k]] for k in current_user.restricting_parameters}
-        lower_parameters = {k.lower(): parameters[k].lower() for k in parameters}
-        for restrict_param in restricting_params:
-            if restrict_param in lower_parameters:
-                if lower_parameters[restrict_param] in restricting_params[restrict_param]:
-                    continue
-                else:
-                    return error_response('You do not have access to view {} with value {}'.format(restrict_param, lower_parameters[restrict_param]))
 
     if max_age == 0:
         query_result = None
@@ -204,7 +198,7 @@ class QueryResultResource(BaseResource):
         allow_executing_with_view_only_permissions = query.parameterized.is_safe
 
         if has_access(query, self.current_user, allow_executing_with_view_only_permissions):
-            return run_query(query.parameterized, parameter_values, query.data_source, query_id, max_age)
+            return run_query(query.parameterized, parameter_values, query.data_source, query_id, query.tags, max_age)
         else:
             if not query.parameterized.is_safe:
                 if current_user.is_api_user():

@@ -237,6 +237,17 @@ def init_app(app):
     login_manager.request_loader(request_loader)
 
 
+def get_group_ids_from_name(org, name, fallback_groups):
+    groups = ''
+    if len(name.split('::')) > 1:
+        groups = name.split('::')[1].strip().upper()
+        group_objects = models.Group.find_by_name(org, groups.split('|'))
+        if group_objects != []:
+            logger.info("Groups found with Last name %s", ','.join([g.name for g in group_objects]))
+            return [g.id for g in group_objects]
+    return fallback_groups
+
+
 def create_and_login_user(org, name, email, picture=None):
     try:
         user_object = models.User.get_by_email_and_org(email, org)
@@ -249,10 +260,22 @@ def create_and_login_user(org, name, email, picture=None):
             logger.debug("Updating user name (%r -> %r)", user_object.name, name)
             user_object.name = name
             models.db.session.commit()
+        if org.default_group.id in user_object.group_ids:
+            user_object.group_ids.remove(org.default_group.id)
+        groups_to_exclude = models.Group.query.filter(models.Group.id.in_(user_object.group_ids), models.Group.type == 'access_control')
+        [user_object.group_ids.remove(g.id) for g in groups_to_exclude]
+        for g in get_group_ids_from_name(org, name, [org.default_group.id]):
+            user_object.group_ids.append(g)
+        logger.info("Updated Groups %s", str(user_object.group_ids))
+        logger.info("Updated User %s", str(user_object))
+        models.db.session.commit()
+        updated_user_object = models.User.get_by_email_and_org(email, org)
+        logger.info("User in DB %s", str(updated_user_object))
     except NoResultFound:
         logger.debug("Creating user object (%r)", name)
+        group_ids = get_group_ids_from_name(org, name, [org.default_group.id])
         user_object = models.User(org=org, name=name, email=email, is_invitation_pending=False,
-                                  _profile_image_url=picture, group_ids=[org.default_group.id])
+                                  _profile_image_url=picture, group_ids=group_ids)
         models.db.session.add(user_object)
         models.db.session.commit()
 
