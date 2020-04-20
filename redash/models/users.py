@@ -229,6 +229,18 @@ class User(TimestampMixin, db.Model, BelongsToOrgMixin, UserMixin, PermissionsCh
         db.session.add(self)
         db.session.commit()
 
+    def get_allowed_restricted_tags(self):
+        tags_result = set()
+        for g in Group.query.filter(Group.id.in_(self.group_ids)):
+            tags_result |= set(g.allowed_tags)
+        allowed_tags = list(tags_result)
+        all_allowed_tags = Group.query.filter(Group.id == 1)[0].allowed_tags
+
+        if all_allowed_tags and allowed_tags and list(set(all_allowed_tags) & set(allowed_tags)) != []:
+            return allowed_tags, list(set(all_allowed_tags) - set(allowed_tags))
+        return allowed_tags, []
+
+
     def is_allowed_access(self, tags, parameters={}):
         error_message = ''
         tags_result = set()
@@ -262,6 +274,7 @@ class User(TimestampMixin, db.Model, BelongsToOrgMixin, UserMixin, PermissionsCh
                     continue
                 if restrict_param in lower_parameters:
                     if lower_parameters[restrict_param]['parameter'] not in restricting_parameters[restrict_param]:
+                        # error_message = 'You do not have access to view {} data. Please contact your administrator.'.format(parameters[lower_parameters[restrict_param]['original_key']])
                         parameters[lower_parameters[restrict_param]['original_key']] = restricting_parameters[restrict_param][0]
         return error_message, parameters
 

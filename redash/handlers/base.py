@@ -2,7 +2,7 @@ import time
 
 from inspect import isclass
 from flask import Blueprint, current_app, request
-
+import operator
 from flask_login import current_user, login_required
 from flask_restful import Resource, abort
 from redash import settings
@@ -16,6 +16,9 @@ from sqlalchemy.dialects import postgresql
 from sqlalchemy_utils import sort_query
 
 routes = Blueprint('redash', __name__, template_folder=settings.fix_assets_path('templates'))
+
+import logging
+logger = logging.getLogger('dashboards')
 
 
 class BaseResource(Resource):
@@ -126,10 +129,19 @@ def json_response(response):
     return current_app.response_class(json_dumps(response), mimetype='application/json')
 
 
-def filter_by_tags(result_set, column):
+def filter_by_tags(result_set, column, extra_include_filter=None, extra_exclude_filter=None):
     if request.args.getlist('tags'):
         tags = request.args.getlist('tags')
         result_set = result_set.filter(cast(column, postgresql.ARRAY(db.Text)).contains(tags))
+    if extra_include_filter and extra_exclude_filter:
+        result_set = result_set.filter(
+            reduce(
+                operator.or_, (
+                    (cast(column, postgresql.ARRAY(db.Text)).contains([itag]) for itag in extra_include_filter)))
+            | reduce(
+                operator.and_, (
+                    (~(cast(column, postgresql.ARRAY(db.Text)).contains([etag])) for etag in extra_exclude_filter)))
+        )
     return result_set
 
 

@@ -28,6 +28,9 @@ order_results = partial(
     allowed_orders=order_map,
 )
 
+import logging
+logger = logging.getLogger('dashboards')
+
 
 class DashboardListResource(BaseResource):
     @require_permission('list_dashboards')
@@ -59,7 +62,12 @@ class DashboardListResource(BaseResource):
                 self.current_user.id,
             )
 
-        results = filter_by_tags(results, models.Dashboard.tags)
+        allowed_tags, restricted_tags = self.current_user.get_allowed_restricted_tags()
+        logger.info('allowed: {}, restricted: {}'.format(allowed_tags, restricted_tags))
+        extra_include_tags = None
+        if allowed_tags != []:
+            extra_include_tags = allowed_tags
+        results = filter_by_tags(results, models.Dashboard.tags, extra_include_tags, restricted_tags)
 
         # order results according to passed order parameter,
         # special-casing search queries where the database
@@ -334,7 +342,12 @@ class DashboardFavoriteListResource(BaseResource):
         else:
             favorites = models.Dashboard.favorites(self.current_user)
 
-        favorites = filter_by_tags(favorites, models.Dashboard.tags)
+        allowed_tags, restricted_tags = self.current_user.get_allowed_restricted_tags()
+        logger.info('allowed: {}, restricted: {}'.format(allowed_tags, restricted_tags))
+        extra_include_tags = None
+        if allowed_tags != []:
+            extra_include_tags = allowed_tags
+        favorites = filter_by_tags(favorites, models.Dashboard.tags, extra_include_tags, restricted_tags)
 
         # order results according to passed order parameter,
         # special-casing search queries where the database
