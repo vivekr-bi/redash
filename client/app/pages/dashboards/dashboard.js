@@ -12,6 +12,7 @@ import template from './dashboard.html';
 import ShareDashboardDialog from './ShareDashboardDialog';
 import AddWidgetDialog from '@/components/dashboards/AddWidgetDialog';
 import TextboxDialog from '@/components/dashboards/TextboxDialog';
+import IframeboxDialog from '@/components/dashboards/IframeboxDialog';
 import notification from '@/services/notification';
 
 import './dashboard.less';
@@ -329,6 +330,13 @@ function DashboardCtrl(
     TextboxDialog.showModal({
       dashboard: this.dashboard,
       onConfirm: text => this.dashboard.addWidget(text).then(this.onWidgetAdded),
+    });
+  };
+
+  this.showAddIframeboxDialog = () => {
+    IframeboxDialog.showModal({
+      dashboard: this.dashboard,
+      onConfirm: text => this.dashboard.addWidget(text, { isHTML: true }).then(this.onWidgetAdded),
     });
   };
 

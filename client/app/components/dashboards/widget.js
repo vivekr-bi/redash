@@ -2,6 +2,7 @@ import { filter } from 'lodash';
 import { angular2react } from 'angular2react';
 import template from './widget.html';
 import TextboxDialog from '@/components/dashboards/TextboxDialog';
+import IframeboxDialog from '@/components/dashboards/IframeboxDialog';
 import widgetDialogTemplate from './widget-dialog.html';
 import EditParameterMappingsDialog from '@/components/dashboards/EditParameterMappingsDialog';
 import './widget.less';
@@ -21,8 +22,9 @@ const WidgetDialog = {
 
 export let DashboardWidget = null; // eslint-disable-line import/no-mutable-exports
 
-function DashboardWidgetCtrl($scope, $location, $uibModal, $window, $rootScope, $timeout, Events, currentUser) {
+function DashboardWidgetCtrl($scope, $location, $uibModal, $window, $rootScope, $timeout, $sce, Events, currentUser) {
   this.canViewQuery = currentUser.hasPermission('view_query');
+  if (this.widget.options.isHTML) { this.widget.html = $sce.trustAsHtml(this.widget.text); }
 
   this.editTextBox = () => {
     TextboxDialog.showModal({
@@ -30,6 +32,18 @@ function DashboardWidgetCtrl($scope, $location, $uibModal, $window, $rootScope, 
       text: this.widget.text,
       onConfirm: (text) => {
         this.widget.text = text;
+        return this.widget.save();
+      },
+    });
+  };
+
+  this.editIframeBox = () => {
+    IframeboxDialog.showModal({
+      dashboard: this.dashboard,
+      text: this.widget.text,
+      onConfirm: (text) => {
+        this.widget.text = text;
+        this.widget.html = $sce.trustAsHtml(text);
         return this.widget.save();
       },
     });
@@ -109,6 +123,8 @@ function DashboardWidgetCtrl($scope, $location, $uibModal, $window, $rootScope, 
     this.load();
   } else if (this.widget.restricted) {
     this.type = 'restricted';
+  } else if (this.widget.options.isHTML) {
+    this.type = 'htmlcontent';
   } else {
     this.type = 'textbox';
   }

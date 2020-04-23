@@ -120,4 +120,25 @@
     </div>
     <div class="body-row-auto scrollbox tiled t-body p-15 markdown" ng-bind-html="$ctrl.widget.text | markdown"></div>
   </div>
+  <div class="tile body-container widget-text" ng-hide="$ctrl.widget.width === 0" ng-if="$ctrl.type=='htmlcontent'">
+    <div class="body-row clearfix t-body">
+      <div class="dropdown pull-right widget-menu-remove" ng-if="!$ctrl.public && $ctrl.dashboard.canEdit()">
+        <div class="dropdown-header">
+          <a class="actions" ng-click="$ctrl.deleteWidget()" title="Remove From Dashboard"><i class="zmdi zmdi-close"></i></a>
+        </div>
+      </div>
+      <div class="dropdown pull-right widget-menu-regular" ng-if="!$ctrl.public && $ctrl.dashboard.canEdit()"
+        uib-dropdown dropdown-append-to-body="true">
+        <div class="dropdown-header">
+          <a data-toggle="dropdown" uib-dropdown-toggle class="actions p-l-15 p-r-15"><i class="zmdi zmdi-more-vert"></i></a>
+        </div>
+
+        <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu style="z-index:1000000">
+          <li><a ng-show="$ctrl.dashboard.canEdit()" ng-click="$ctrl.editIframeBox()">Edit</a></li>
+          <li><a ng-show="$ctrl.dashboard.canEdit()" ng-click="$ctrl.deleteWidget()">Remove From Dashboard</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="body-row-auto tiled t-body p-15" ng-bind-html="$ctrl.widget.html"></div>
+  </div>
 </div>
